@@ -1,4 +1,19 @@
+def printMenu
+    print("1.problema 5")
+    print("2.problema 1")
+    print("3.problema 2")
+def main():
+    printMenu()
+    optiune = input("Dati optiunea:")
+    if optiune == "1":
+        is_palindrome()
+    if optiune == "2":
+        get_largest_prime_below()
+    if optiune == "3":
+        get_age_in_days()
+main()
 #problema 5
+
 def is_palindrome(n):
     '''
 
