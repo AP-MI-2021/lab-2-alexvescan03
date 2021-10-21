@@ -1,19 +1,27 @@
-def printMenu
+#from datetime import datetime  # putem lucra cu variabile de tip date
+import datetime
+
+def printMenu():
     print("1.problema 5")
     print("2.problema 1")
     print("3.problema 2")
-def main():
-    printMenu()
-    optiune = input("Dati optiunea:")
-    if optiune == "1":
-        is_palindrome()
-    if optiune == "2":
-        get_largest_prime_below()
-    if optiune == "3":
-        get_age_in_days()
-main()
-#problema 5
+    print("4.exit program")
 
+# problema 2
+def get_age_in_days(day):
+    """
+    :param day:data nasterii acelei persoane
+    :return:cate zile a trait
+    """
+
+    day = datetime.datetime.strptime(day , '%d/%m/%Y')
+
+    number_of_days_since_day = (datetime.datetime.utcnow() - day).days  # diferenta dintre data actuala si data introdusa in zile
+
+    return number_of_days_since_day  # numarul de zile
+
+
+# problema 5
 def is_palindrome(n):
     '''
 
@@ -23,36 +31,25 @@ def is_palindrome(n):
 
     cn = n
     inv = 0
+
     while cn > 0:
         inv = inv * 10 + cn % 10
         cn = cn // 10
+
     ok = False
+
     if inv == n:
         ok = True
-    if ok == True:
-        print("da")
-    else:
-        print("nu")
 
+    return ok
 
-def test_is_palindrome():
-    assert is_palindrome(121) is True
-    assert is_palindrome(100) is False
-    assert is_palindrome(116) is False
-    assert is_palindrome(333) is True
-    n = int(input("n="))
-    m = is_palindrome(n)
-    print(m)
+# problema 1
 
-
-test_is_palindrome()
-
-#problema 1
-def get_largest_prime_below(x):
+def isPrime(x):
     '''
 
-    :param x: citim un numar de la tastatura
-    :return: ne returneaza ultimul numar prim mai mic decat acesta
+    :param x: un numar
+    :return: returneaza True daca numarul este prim si false in caz contrar
     '''
 
     if (x <= 1):
@@ -66,32 +63,79 @@ def get_largest_prime_below(x):
         if (x % i == 0):
             return False
         i += 2
+
     return True
-    for i in range(n - 1, 1, -1):
-        if (get_largest_prime_below(i)):
-            print("numarul {} este prim".format(i))
-        break
 
 
-def test_get_largest_prime_below(n):
-    n = int(input("n="))
-    assert get_largest_prime_below(12) == 11
-    assert get_largest_prime_below(10) == 7
-    assert get_largest_prime_below(25) == 13
-    assert get_largest_prime_below(5) == 3
-    m = test_get_largest_prime_below(n)
-    print(m)
+def get_largest_prime_below(x):
+    for i in range(x - 1, 1, -1):  # for(i = x-1 ; i > 1 ; i -=1)
+        if (isPrime(i)):
+            return i
+
+    return 2
 
 
-test_get_largest_prime_below()
+def test_is_palindrome():
 
-#problema 2
-def get_age_in_days(day):
-    '''
+    assert is_palindrome(5) == True
 
-    :param day: data nasterii
-    :return: varsta persoanei
-    '''
-  from datetime import datetime #putem lucra cu variabile de tip date
-  number_of_days_since_day = (datetime.utcnow() - day).days #diferenta dintre data actuala si data introdusa in zile
-  return number_of_days_since_day #numarul de zile
+    assert is_palindrome(151) == True
+
+    assert is_palindrome(253) == False
+
+    assert is_palindrome(1002) == False
+
+def test_get_largest_prime_below():
+
+    assert get_largest_prime_below(15) == 13
+    assert get_largest_prime_below(30) == 29
+    assert get_largest_prime_below(32) == 31
+    assert get_largest_prime_below(13) == 11
+def test_get_age_in_days():
+
+    assert get_age_in_days("12/05/2002") == 7102
+
+
+if(__name__ == "__main__"):
+
+    test_get_age_in_days()
+    test_get_largest_prime_below()
+    test_is_palindrome()
+
+    while (True):
+
+        printMenu()
+
+        optiune = input("Dati optiunea: ")
+
+        if (optiune == "4"):
+            break
+
+        if optiune == "1":
+
+            n = int(input("n = "))
+
+            isPalindrome = is_palindrome(n)
+
+            if (isPalindrome):
+                print("{} este palindrom".format(n))
+            else:
+                print("{} nu este palindrom".format(n))
+
+        elif optiune == "2":
+
+            n = int(input("n = "))
+
+            largestPrimeBelowN = get_largest_prime_below(n)
+
+            print("Cel mai mic numar palindrom decat {} este {}".format(n, largestPrimeBelowN));
+
+        elif optiune == "3":
+
+            date = input("Data nasterii = ")
+
+            #d = datetime.datetime.strptime(datestring , '%d/%m/%Y')
+
+            days= get_age_in_days(date)
+
+            print("Ai trait {} zile".format(days))
