@@ -24,7 +24,6 @@ def get_age_in_days(day):
 # problema 5
 def is_palindrome(n):
     '''
-
     :param n: citeste un numar de la tastatura
     :return: returneaza daca este palindrom sau nu
     '''
@@ -47,7 +46,6 @@ def is_palindrome(n):
 
 def isPrime(x):
     '''
-
     :param x: un numar
     :return: returneaza True daca numarul este prim si false in caz contrar
     '''
@@ -91,14 +89,9 @@ def test_get_largest_prime_below():
     assert get_largest_prime_below(30) == 29
     assert get_largest_prime_below(32) == 31
     assert get_largest_prime_below(13) == 11
-def test_get_age_in_days():
-
-    assert get_age_in_days("12/05/2002") == 7102
-
 
 if(__name__ == "__main__"):
 
-    test_get_age_in_days()
     test_get_largest_prime_below()
     test_is_palindrome()
 
